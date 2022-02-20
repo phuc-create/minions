@@ -1,4 +1,35 @@
-.button-ui {
-  padding: 10px;
-  border: none;
+@import "../styles/root";
+
+@mixin flex($justify, $align) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
 }
+
+.button-ui {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    position: relative;
+    width: var(--width);
+    height: var(--height);
+    text-align: center;
+    font-size: 25px;
+    background: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: var(--buttonColor);
+    overflow: hidden;
+    transition: 0.25s;
+    opacity: 0.8;
+    outline: none;
+
+    &:hover {
+      box-shadow: inset calc(var(--width) / 2) 0 0 0 var(--buttonColor),
+        inset calc(var(--width) / 2 * -1) 0 0 0 var(--buttonColor);
+      color: var(--light1);
+      opacity: 1;
+    }
+  }
+  
+

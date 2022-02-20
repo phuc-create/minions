@@ -1,16 +1,26 @@
 import React from 'react'
 import classnames from 'classnames'
-import "./style.scss"
+import './style.scss'
+
 interface ButtonProps {
   id: string
-  type: 'button' | 'submit' | 'reset'
+  type?: 'button' | 'submit' | 'reset'
   className?: string
   children: React.ReactNode
   disabled?: boolean
   link?: string
-  style?: object
-  onClick?: () => void
+  style?: object,
+  onClick?: () => void,
+  width?: number,
+  height?: number
 }
+
+interface MyCustomCSS extends React.CSSProperties {
+  '--buttonColor': string;
+  '--width': string;
+  '--height': string;
+}
+
 const Button: React.FC<ButtonProps> = ({
   id,
   type,
@@ -19,9 +29,19 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
   link,
   style,
-  onClick
+  onClick,
+  width,
+  height
 }) => {
   const buttonClass = classnames('button-ui', className)
+
+  const styles = {
+    '--buttonColor': '#ea2027',
+    '--width': width ? width : '300px',
+    '--height': height ? height : 'auto',
+    ...style,
+  } as MyCustomCSS
+
   if (link) {
     return (
       <a
@@ -29,7 +49,7 @@ const Button: React.FC<ButtonProps> = ({
         onClick={onClick}
         className={buttonClass}
         id={id}
-        style={style}
+        style={styles}
       >
         {children}
       </a>
@@ -42,7 +62,7 @@ const Button: React.FC<ButtonProps> = ({
       id={id}
       disabled={disabled}
       className={buttonClass}
-      style={style}
+      style={styles}
     >
       {children}
     </button>
@@ -52,7 +72,8 @@ const Button: React.FC<ButtonProps> = ({
 export default Button
 
 const defaultProps = {
-  disabled: false
+  disabled: false,
+  style: {}
 }
 
 Button.defaultProps = defaultProps
