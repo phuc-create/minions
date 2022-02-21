@@ -1,15 +1,30 @@
 import React from 'react'
 import classnames from 'classnames'
-
+import { colorsInfor as colors } from '../Utils'
+import './style.scss'
 interface FormProps {
-  children: React.ReactChild,
+  children: JSX.Element | JSX.Element[],
   className: string,
-  onSubmit: () => void
+  onSubmit: React.FormEventHandler,
+  style: object
 }
-const Form: React.FC<FormProps> = ({ children, onSubmit, className }) => {
+
+interface MyCustomCSS extends React.CSSProperties {
+  '--formBackground': string,
+  '--formShadow': string,
+}
+
+const Form: React.FC<FormProps> = ({ children, onSubmit, className, style }) => {
   const formClass = classnames('form-ui', className)
+
+  const styles = {
+    '--formBackground': colors.form.background,
+    '--formShadow': colors.form.shadow,
+    ...style
+  } as MyCustomCSS
+
   return (
-    <form onSubmit={onSubmit} className={formClass}>{children}</form>
+    <form onSubmit={onSubmit} className={formClass} style={styles}>{children}</form>
   )
 }
 

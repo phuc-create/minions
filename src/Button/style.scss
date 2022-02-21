@@ -7,17 +7,18 @@
 }
 
 .button-ui {
-    padding: 10px;
+    padding: 5px;
+    margin: 10px 0;
     border: none;
     border-radius: 5px;
     position: relative;
     width: var(--width);
     height: var(--height);
     text-align: center;
-    font-size: 25px;
-    background: none;
+    font-size: 14px;
+    background: var(--buttonBackground);
     cursor: pointer;
-    text-transform: uppercase;
+    text-transform: capitalize;
     color: var(--buttonColor);
     overflow: hidden;
     transition: 0.25s;
@@ -25,11 +26,26 @@
     outline: none;
 
     &:hover {
-      box-shadow: inset calc(var(--width) / 2) 0 0 0 var(--buttonColor),
-        inset calc(var(--width) / 2 * -1) 0 0 0 var(--buttonColor);
+      box-shadow: inset calc(var(--width) / 2) 0 0 0 var(--buttonBackground),
+        inset calc(var(--width) / 2 * -1) 0 0 0 var(--buttonBackground);
       color: var(--light1);
       opacity: 1;
     }
-  }
+    &.btn-primary {
+      background-color: var(--backgroundPrimary);
+    }
+    &.btn-secondary {
+      background-color: var(--backgroundSecondary);
+    }
+    &.btn-success {
+      background-color: var(--backgroundSuccess);
+    }
+    &.btn-error {
+      background-color: var(--backgroundError);
+    }
+    &.btn-warn {
+      background-color: var(--backgroundWarn);
+    }
+}
   
 
