@@ -1,3 +1,21 @@
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex($justify, $align) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin flex-mix($justify, $align) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
 *,
 ::before,
 ::after {
@@ -14,6 +32,19 @@
   --text-hover: #d19930;
   --bg-hover: #1d1e22;
   --tomato: #ea2027;
+  --tomato: #e74c3c;
+  --main-bg: #ecf0f1;
+  --white: #ffffff;
+  --black: #000000;
+  --star: #f1c40f;
+  --text: #34495e;
+  --text2: #34495e;
+  --bg-list:#fee4cb;
+  --bg-list2:#ffd3e2;
+  --bg-list3:#dbf6fd;
+  --bg-list4:#c8f7dc;
+  --purple:#D980FA;
+  --blue:#0652DD;
 }
 $light1: #ffffff;
 $light2: #ecf0f1;

@@ -10,43 +10,17 @@ type ConfigObject = {
 
 interface ChoseFieldProps {
   config: ConfigObject[],
-  multiple: boolean,
-  onChange: (value?: string | Array<string | number>) => void;
-  value: Array<string | number>
+  multiple?: boolean,
+  onChange: (value?: string | number | Array<string | number>) => void,
+  value: string | number | Array<string | number>,
+  className?: string,
+  size: 'small' | 'medium' | 'large'
 }
-const CbDemo: ConfigObject[] = [
-  {
-    id: 1,
-    name: 'checkbox',
-    label: 'Eating',
-    value: 'eat'
-  },
-  {
-    id: 2,
-    name: 'checkbox',
-    label: 'Watching',
-    value: 'watch'
-  },
-  {
-    id: 3,
-    name: 'checkbox',
-    label: 'Talking',
-    value: 'talk'
-  },
-  {
-    id: 4,
-    name: 'checkbox',
-    label: 'Walking',
-    value: 'walk'
-  }, {
-    id: 5,
-    name: 'checkbox',
-    label: 'Sleeping',
-    value: 'sleep'
-  }
-]
-const ChoseField: React.FC<ChoseFieldProps> = ({ config, multiple, onChange, value }) => {
-  const [checkBox, setCheckBox] = React.useState([])
+
+const ChoseField: React.FC<ChoseFieldProps> = ({ config, multiple, onChange, value, className, size }) => {
+
+  const chooseFieldClass = classnames('checkbox-ui', className)
+
   const onChangeValue = (v: string) => {
     onChange(v)
   }
@@ -54,61 +28,76 @@ const ChoseField: React.FC<ChoseFieldProps> = ({ config, multiple, onChange, val
     if (!onChange) {
       return
     }
+    if (Array.isArray(value)) {
+      const index = value && value.indexOf(v)
+      let setValue = []
 
-    const index = value && value.indexOf(v)
-    let newValue = []
+      if (index >= 0) {
+        setValue = value && value.filter((el: string | number) => el !== v)
+      } else {
+        setValue = value && [...value, v]
+      }
 
-    if (value && index >= 0) {
-      newValue = value && value.filter(el => el !== v)
-    } else {
-      newValue = value && [...value, v]
+      onChange(setValue)
     }
-
-    onChange(newValue)
   }
 
-  return (
-    <div className='choose-field-ui'>
-      <div className="filter-something">
+  const ChangeOnType = (multiple ? onChangeMultValue : onChangeValue)
+  if (Array.isArray(config)) {
+    return (
+      <div className={chooseFieldClass}>
         {config && config.map(cb => {
           // <div className="filter" key={cb.id}>
           //   <input type="checkbox" id={cb.id.toString()} name={cb.name} value={cb.value} onChange={onChange}/>
           //   <label htmlFor={cb.name}>{cb.label}</label>
           // </div>
-          <ChooseOption cb={cb} key={cb.id} onChange={() => (multiple ? onChangeMultValue : onChangeValue)} />
+          return (
+            <ChooseOption cb={cb} key={cb.id} onChange={ChangeOnType} value={value} size={size} />
+          )
         })}
-        {/* <div className="filter">
-          <input type="checkbox" id="watch" name="checkbox" />
-          <label htmlFor="watch">Watching</label>
-        </div>
-        <div className="filter">
-          <input type="checkbox" id="walk" name="checkbox" />
-          <label htmlFor="walk">Walking</label>
-        </div>
-        <div className="filter">
-          <input type="checkbox" id="play" name="checkbox" />
-          <label htmlFor="play">Playing</label>
-        </div> */}
       </div>
-    </div>
-  )
+    )
+  }
+  return <></>
+
 }
 
 export default ChoseField
 
 interface ChooseOptionProps {
   cb: ConfigObject,
-  onChange: (value?: string | Array<string | number>) => void
+  onChange(value?: string | Array<string | number>): void,
+  value: string | number | Array<string | number>,
+  size: string
 }
-export const ChooseOption: React.FC<ChooseOptionProps> = ({ cb, onChange }) => {
+
+interface MyCustomCSS extends React.CSSProperties {
+  '--size': string,
+  '--widthBefore': string,
+  '--widthAfter': string,
+  '--heightBefore': string,
+  '--heightAfter': string,
+}
+const ChooseOption: React.FC<ChooseOptionProps> = ({ cb, onChange, value, size }) => {
+  const active = Array.isArray(value) ? value.find(v => v === cb.value) : value === cb.value
 
   const handleChange = () => {
     onChange(cb.value)
   }
+  // React.useEffect(() => {
+  //   setActive(Array.isArray(value) ? value.find(v => v === cb.value) : value === cb.value)
+  // }, [])
+  const styles = {
+    '--size': size === 'small' ? '30px' : size === 'medium' ? '40px' : '50px',
+    '--heightAfter': size === 'small' ? '4px' : size === 'medium' ? '5px' : '5px',
+    '--widthAfter': size === 'small' ? '19px' : size === 'medium' ? '23px' : '30px',
+    '--heightBefore': size === 'small' ? '4px' : size === 'medium' ? '5px' : '5px',
+    '--widthBefore': size === 'small' ? '12px' : size === 'medium' ? '17px' : '22px'
+  } as MyCustomCSS
   return (
-    <div className="filter" key={cb.id}>
-      <input type="checkbox" id={cb.id.toString()} name={cb.name} value={cb.value} onChange={handleChange} />
-      <label htmlFor={cb.name}>{cb.label}</label>
+    <div className={active ? 'checkbox-bx active' : 'checkbox-bx'} key={cb.id} style={styles}>
+      <input style={styles} className='checkbox-bx__input' type="checkbox" id={cb.id.toString()} name={cb.name} value={cb.value} onChange={handleChange} />
+      <label className='checkbox-bx__label' htmlFor={cb.name}>{cb.label}</label>
     </div>
   )
 }
