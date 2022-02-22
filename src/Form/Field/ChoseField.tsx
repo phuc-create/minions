@@ -90,7 +90,7 @@ const ChooseOption: React.FC<ChooseOptionProps> = ({ cb, onChange, value, size }
   const styles = {
     '--size': size === 'small' ? '30px' : size === 'medium' ? '40px' : '50px',
     '--heightAfter': size === 'small' ? '4px' : size === 'medium' ? '5px' : '5px',
-    '--widthAfter': size === 'small' ? '19px' : size === 'medium' ? '23px' : '30px',
+    '--widthAfter': size === 'small' ? '19px' : size === 'medium' ? '25px' : '30px',
     '--heightBefore': size === 'small' ? '4px' : size === 'medium' ? '5px' : '5px',
     '--widthBefore': size === 'small' ? '12px' : size === 'medium' ? '17px' : '22px'
   } as MyCustomCSS
