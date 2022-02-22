@@ -15,6 +15,11 @@ type ColorsInfor = {
       background: string,
       color: string
     }
+  },
+  noti: {
+    success: string,
+    error: string,
+    warn: string
   }
 }
 interface ContextProps {
@@ -37,6 +42,11 @@ export const colorsInfor: ColorsInfor = {
       background: '#f2f2f2',
       color: '#b3b3b3'
     }
+  },
+  noti: {
+    success: '#2ecc71',
+    error: '#e74c3c',
+    warn: '#f1c40f'
   }
 }
 
@@ -76,14 +86,15 @@ export const ColorsCtx = React.createContext<ColorsInfor>(colorsInfor)
 
 export const ColorsProvider: React.FC<ContextProps> = ({ children }) => {
   const [cls, setCls] = React.useState<ColorsInfor>(colorsInfor)
-  const { button, form } = cls
+  const { button, form, noti } = cls
   React.useEffect(() => {
     setCls(colorsInfor)
   }, [])
 
   const values: ColorsInfor = {
     button,
-    form
+    form,
+    noti
   }
 
   return (

@@ -67,7 +67,7 @@ $heightBf:var(--heightBefore);
     font-family: 'Poppins',sans-serif;
   }
   &.active {
-    input[type="checkbox"] {
+    input[type="checkbox"]:checked {
 		background: #e74c3c;
 		&:before {
 			opacity: 1;
@@ -89,5 +89,27 @@ $heightBf:var(--heightBefore);
 	border-radius: 4px 4px 0px 0px;
 	opacity: 0;
 }
-
+}
+.notification {
+	width: 150px;
+	padding: 7px 3px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	
+	&.noti-success{
+		background: var(--notiSuccessColor);
+		background-color: rgba(0,0,0,0.1);
+		color: var(--notiSuccessColor);
+	}
+	&.noti-error{
+		background: var(--notiErrorColor);
+		background-color: rgba(0,0,0,0.1);
+		color: var(--notiErrorColor);
+	}
+	&.noti-warn{
+		background: var(--notiWarnColor);
+		background-color: rgba(0,0,0,0.1);
+		color: var(--notiWarnColor);
+	}
 }
