@@ -97,7 +97,7 @@ const ChooseOption: React.FC<ChooseOptionProps> = ({ cb, onChange, value, size }
   return (
     <div className={active ? 'checkbox-bx active' : 'checkbox-bx'} key={cb.id} style={styles}>
       <input style={styles} className='checkbox-bx__input' type="checkbox" id={cb.id.toString()} name={cb.name} value={cb.value} onChange={handleChange} />
-      <label className='checkbox-bx__label' htmlFor={cb.name}>{cb.label}</label>
+      <label className='checkbox-bx__label' htmlFor={cb.id.toString()}>{cb.label}</label>
     </div>
   )
 }

@@ -5,14 +5,17 @@ $heightBf:var(--heightBefore);
 
 .textField-ui {
   width: 100%;
-  padding: 10px 5px;
-  border: none;
-  background-color: var(--inputFieldBg);
   // color:var(--inputFieldColor);
-  font-size: 14px;
-  text-align: left;
-  border-radius: 4px;
   margin: 5px 0 10px 0;
+	.input-field-ui {
+		width: 100%;
+		background-color: var(--inputFieldBg);
+		padding: 10px 5px;
+		font-size: 14px;
+		text-align: left;
+		border-radius: 4px;
+		border: none;
+	}
 }
 .checkbox-ui {
 	display: block;
@@ -91,25 +94,27 @@ $heightBf:var(--heightBefore);
 }
 }
 .notification {
-	width: 150px;
-	padding: 7px 3px;
+	width: 100%;
+	padding: 0px 3px;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
+	font-size: 12px;
+	border-radius: 4px;
+	margin: 5px 0px 7px;
+	opacity: 1;
+	transition: .35s;
 	
 	&.noti-success{
-		background: var(--notiSuccessColor);
-		background-color: rgba(0,0,0,0.1);
+		background-color: var(--notiSuccessColorBg);
 		color: var(--notiSuccessColor);
 	}
 	&.noti-error{
-		background: var(--notiErrorColor);
-		background-color: rgba(0,0,0,0.1);
+		background-color: var(--notiErrorColorBg);
 		color: var(--notiErrorColor);
 	}
 	&.noti-warn{
-		background: var(--notiWarnColor);
-		background-color: rgba(0,0,0,0.1);
+		background-color: var(--notiWarnColorBg);
 		color: var(--notiWarnColor);
 	}
 }

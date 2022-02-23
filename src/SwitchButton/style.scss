@@ -1,0 +1,31 @@
+@import "../styles/root";
+
+.switch-ui {
+  display: inline-flex;
+  flex-direction: row;
+  .btn-ui {
+    border: none;
+    border: 1px solid #EA2027;
+    padding: 9px 13px;
+    background-color: #0652DD;
+    color: #ffffff;
+    transition: .35s;
+    cursor: pointer;
+    
+    &:first-child {
+      border-radius: 5px 0px 0px 5px;
+    }
+
+    &:last-child {
+      border-radius: 0px 5px 5px 0px;
+    }
+
+    &:not(:first-of-type){
+      margin-left: -1px;
+      border-left: 1px solid #EA2027;;
+    }
+    &.is-active {
+      background-color: #1B1464;
+    }
+  }
+}

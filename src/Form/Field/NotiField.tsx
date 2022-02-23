@@ -11,7 +11,10 @@ interface NotiFieldProps {
 interface MyCustomCSS extends React.CSSProperties {
   '--notiSuccessColor': string,
   '--notiErrorColor': string,
-  '--notiWarnColor': string
+  '--notiWarnColor': string,
+  '--notiSuccessColorBg': string,
+  '--notiErrorColorBg': string,
+  '--notiWarnColorBg': string
 }
 const NotiField: React.FC<NotiFieldProps> = ({ type, title }) => {
   const notiClass = classnames('notification', {
@@ -23,6 +26,9 @@ const NotiField: React.FC<NotiFieldProps> = ({ type, title }) => {
     '--notiSuccessColor': colors.noti.success,
     '--notiErrorColor': colors.noti.error,
     '--notiWarnColor': colors.noti.warn,
+    '--notiSuccessColorBg': colors.noti.success + '70',
+    '--notiErrorColorBg': colors.noti.error + '70',
+    '--notiWarnColorBg': colors.noti.warn + '70',
   } as MyCustomCSS
   return (
     <span className={notiClass} style={styles}>{title}</span>

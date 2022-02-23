@@ -10,7 +10,8 @@ interface TextFieldProps {
   onBlur?: () => void,
   onChange: React.FormEventHandler,
   placeholder?: string,
-  value: string
+  value: string,
+  children?: JSX.Element | JSX.Element[]
 }
 
 interface MyCustomCSS extends React.CSSProperties {
@@ -18,7 +19,7 @@ interface MyCustomCSS extends React.CSSProperties {
   '--inputFieldColor': string
 }
 
-const TextField: React.FC<TextFieldProps> = ({ type, className, name, onBlur, style, placeholder, onChange, value }) => {
+const TextField: React.FC<TextFieldProps> = ({ type, className, name, onBlur, style, placeholder, onChange, value, children }) => {
   const textFieldClass = classnames('textField-ui', className)
 
   const styles = {
@@ -28,16 +29,19 @@ const TextField: React.FC<TextFieldProps> = ({ type, className, name, onBlur, st
   } as MyCustomCSS
 
   return (
-    <input
-      type={type}
-      name={name}
-      onBlur={onBlur}
-      style={styles}
-      className={textFieldClass}
-      placeholder={placeholder ? placeholder : 'hello world'}
-      onChange={onChange}
-      value={value}
-    />
+    <div className={textFieldClass}>
+      <input
+        type={type}
+        name={name}
+        onBlur={onBlur}
+        style={styles}
+        className="input-field-ui"
+        placeholder={placeholder ? placeholder : 'hello world'}
+        onChange={onChange}
+        value={value}
+      />
+      {children}
+    </div>
   )
 }
 
